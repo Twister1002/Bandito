@@ -1,0 +1,26 @@
+{
+  "name": "Bandito",
+  "version": "0.0.1",
+  "main": "main.js",
+  "description": "<h2>Bandito</h2>\r <p>This is an email client that will be open sourced and available to all</p>\r <footer>This application is in the beginning stages of development.</footer>",
+  "scripts": {
+    "start": "electon ."
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Twister1002/Bandito.git"
+  },
+  "dependencies": {
+    "electron": "^1.7.10"
+  },
+  "devDependencies": {
+    "electron": "^1.7.10"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Twister1002/Bandito/issues"
+  },
+  "homepage": "https://github.com/Twister1002/Bandito#readme"
+}
