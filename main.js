@@ -9,11 +9,11 @@ let win;
 function createWindow () {
 
 	// Create the browser window.
-	win = new BrowserWindow({width: 1024, height: 600})
+	win = new BrowserWindow({width: 1024, height: 800})
 
 	// and load the index.html of the app.
 	win.loadURL(url.format({
-		pathname: path.join(__dirname, 'src/index.html'),
+		pathname: path.join(__dirname, 'parts/index.html'),
 		protocol: 'file:',
 		slashes: true
 	}))
@@ -48,7 +48,7 @@ function createWindow () {
 		}
 	]);
 
-	Menu.setApplicationMenu(menu);
+	// Menu.setApplicationMenu(menu);
 }
 
 // This method will be called when Electron has finished

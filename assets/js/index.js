@@ -4,5 +4,4 @@ const emailNotification = {
     "icon": "" //path.join(__dirname, "../assets/assets/images/email.png")
 };
 
-
 const notification = new window.Notification(emailNotification.title, emailNotification);
