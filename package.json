@@ -4,25 +4,28 @@
   "main": "main.js",
   "description": "<h2>Bandito</h2>\r <p>This is an email client that will be open sourced and available to all</p>\r <footer>This application is in the beginning stages of development.</footer>",
   "scripts": {
-    "start": "electon .",
+    "start": "electron .",
     "gulp": "gulp watch",
-    "package-mac": "electron-packager . --overwrite --platform=darwin --arch=x64 --icon=assets/icons/mac/icon.icns --prune=true --out=release-builds",
-    "package-win": "electron-packager . electron-tutorial-app --overwrite --asar=true --platform=win32 --arch=ia32  --prune=true --out=release-builds --version-string.CompanyName=CE --version-string.FileDescription=CE --version-string.ProductName=\"Bandito\"",
-    "package-linux": "electron-packager . electron-tutorial-app --overwrite --asar=true --platform=linux --arch=x64 --icon=assets/icons/png/1024x1024.png --prune=true --out=release-builds"
+    "package-mac": "electron-packager . Bandito --overwrite --platform=darwin --arch=x64 --icon=assets/icons/mac/icon.icns --prune=true --out=release-builds",
+    "package-win": "electron-packager . Bandito --overwrite --asar=true --platform=win32 --arch=ia32  --prune=true --out=release-builds --version-string.CompanyName=CE --version-string.FileDescription=CE --version-string.ProductName=\"Bandito\"",
+    "package-linux": "electron-packager . Bandito --overwrite --asar=true --platform=linux --arch=x64 --icon=assets/icons/png/1024x1024.png --prune=true --out=release-builds"
   },
   "repository": {
     "type": "git",
     "url": "git+https://github.com/Twister1002/Bandito.git"
   },
   "dependencies": {
-    "axios": "^0.17.1"
+    "axios": "0.18.0",
+    "electron-updater": "2.21.0"
   },
   "devDependencies": {
-    "electron": "^1.8.1",
-    "electron-packager": "^10.1.0",
-    "gulp-sass": "3.1.0",
+    "electron": "1.8.3",
+    "electron-packager": "10.1.0",
+    "electron-builder": "20.3.1",
     "gulp": "3.9.1",
-    "browser-sync": "2.18.13"
+    "gulp-sass": "3.1.0",
+    "gulp-sourcemaps": "2.6.4",
+    "browser-sync": "2.23.6"
   },
   "keywords": [],
   "author": "",
