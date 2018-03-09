@@ -1,6 +1,4 @@
-// import { autoUpdater } from 'electron-updater';
-
-const {app, BrowserWindow, Menu, MenuItem} = require('electron');
+const {app, BrowserWindow, Menu, MenuItem, ipcMain, Notification} = require('electron');
 const autoUpdater = require("electron-updater").autoUpdater;
 const path = require('path');
 const url = require('url');
@@ -9,6 +7,7 @@ const fs = require("fs");
 // Keep a global reference of the window object, if you don't, the window will
 // be closed automatically when the JavaScript object is garbage collected.
 let win;
+// const notif = new Notification();
 
 function createWindow () {
 	// Create the browser window.
@@ -20,14 +19,7 @@ function createWindow () {
 	});
 
 	// and load the index.html of the app.
-	win.loadURL(url.format({
-		pathname: path.join(__dirname, 'parts/index.html'),
-		protocol: 'file:',
-		slashes: true
-	}));
-
-	// Open the DevTools.
-	win.webContents.openDevTools();
+	win.loadURL(LoadPage("main"));
 
 	// Emitted when the window is closed.
 	win.on('closed', () => {
@@ -68,11 +60,16 @@ app.on('activate', () => {
 // In this file you can include the rest of your app's specific main process
 // code. You can also put them in separate files and require them here.
 
+ipcMain.on("notification:mail", (title, desc) => {
+	if (Notification.isSupported()) {
+		new Notification().show()
+	}
+})
+
 // Returns a url joined path 
 function LoadPage(fileName) {
 	var urlPath = url.format({
-		pathname: path.join(__dirname, "parts", fileName+".html"),
-		protocol: 'file:',
+		pathname: path.join(__dirname, fileName+".html"),
 		slashes: true
 	});
 
@@ -86,45 +83,35 @@ function CreateMenu() {
         "label": "File",
         "submenu": [
             {
-                "label": "Quit",
+				"label": "Quit",
+				"accelerator": "CmdOrCtrl+Q",
                 "click": () => {
                     app.quit();
                 }
-            }
-        ]
-	}));
-	
-	menu.append(new MenuItem({
-		"label": "Accounts",
-		"submenu": [{
-			"label": "Edit Accounts",
-			"accelerator": "CmdOrCtrl+A",
-			"click": () => {
-				win.loadURL(LoadPage("accounts"));
 			}
-		}]
+        ]
 	}));
 
 	menu.append(new MenuItem({
-        "label": "View",
-        "submenu": [
-            {
-                "label": "Reload", 
-                "role": "reload",
-                "accelerator": "CmdOrCtrl+R",
-                "click": () => { 
-                    win.reload();
-                }
-            },
-            {
-                "label": "Console Window", 
-                "accelerator": "CmdOrCtrl+I",
-                "click": () => {
-                    win.openDevTools();
-                }
-            }
-        ]
-    }));
+		"label": "View",
+		"submenu": [
+			{
+				"label": "Reload", 
+				"role": "reload",
+				"accelerator": "CmdOrCtrl+R",
+				"click": () => { 
+					win.reload();
+				}
+			},
+			{
+				"label": "Console Window", 
+				"accelerator": "CmdOrCtrl+I",
+				"click": () => {
+					win.openDevTools();
+				}
+			}
+		]
+	}));
 
 	return menu;
 }

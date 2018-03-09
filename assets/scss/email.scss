@@ -1,0 +1,17 @@
+section#email-section {
+    .email-options {
+
+        ul {
+            @include flexbox();
+            justify-content: flex-end;
+
+            li {
+                flex: 0 0 auto;
+                margin: 0 1em;
+                padding: .5em 1em;
+                background-color: $light-grey;
+                cursor: pointer;
+            }
+        }
+    }
+}

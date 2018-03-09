@@ -1,0 +1,24 @@
+section#email-list-section {
+    ul {
+        width: 100%;
+
+        li {
+            @include flexbox();
+            border-bottom: 2px solid $light-grey;
+            padding: .75em;
+
+            &:hover {
+                background-color: $light-grey;
+                cursor: pointer;
+            }
+
+            > div {
+                flex: 1 1 auto;
+            }
+
+            .time {
+                text-align: right;
+            }
+        }
+    }
+}
