@@ -1,8 +1,8 @@
 let 
 gulp = require("gulp"),
 sass = require("gulp-sass"),
-sourcemaps = require("gulp-sourcemaps");
-// browserSync = require("browser-sync").create();
+sourcemaps = require("gulp-sourcemaps"),
+browserSync = require("browser-sync").create();
 
 const sassOptions = {
     "errLogToConsole": true,
@@ -11,9 +11,7 @@ const sassOptions = {
 };
 
 const browserSyncSettings = {
-    "server": {
-        "baseDir": "./"
-    }
+    "localOnly": true
 }
 
 gulp.task("sass", function() {
@@ -24,16 +22,17 @@ gulp.task("sass", function() {
         .on("error", sass.logError)
         .pipe(sourcemaps.write())
         .pipe(gulp.dest("./assets/css"))
-        // .pipe(browserSync.stream({
-        //     "stream": true
-        // }))
+        .pipe(browserSync.stream({
+            "stream": true
+        }))
+    ;
 });
 
-// gulp.task("browserSync", function() {
-//     browserSync.init();
-// });
+gulp.task("browserSync", function() {
+    browserSync.init(browserSyncSettings);
+});
 
-gulp.task("watch", [], function() {
+gulp.task("watch", ["browserSync"], function() {
     gulp.watch("./assets/scss/*.scss", ["sass"]);
     // gulp.watch("*.html").on("change", browserSync.reload);
 });
