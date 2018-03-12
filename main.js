@@ -1,8 +1,11 @@
-const {app, BrowserWindow, Menu, MenuItem, ipcMain, Notification} = require('electron');
+const {app, BrowserWindow, Menu, MenuItem, ipcMain, ipcRenderer, Notification} = require('electron');
 const autoUpdater = require("electron-updater").autoUpdater;
 const path = require('path');
 const url = require('url');
 const fs = require("fs");
+
+const {EmailAccount} = require("./modules/emailaccount.js");
+const emailAccounts = [];
 
 // Keep a global reference of the window object, if you don't, the window will
 // be closed automatically when the JavaScript object is garbage collected.
@@ -37,6 +40,7 @@ function createWindow () {
 // Some APIs can only be used after this event occurs.
 app.on('ready', () => {
 	autoUpdater.checkForUpdatesAndNotify();
+	SetEmailAccounts();
 	createWindow();
 });
 
@@ -64,6 +68,17 @@ ipcMain.on("notification:mail", (title, desc) => {
 	if (Notification.isSupported()) {
 		new Notification().show()
 	}
+});
+
+ipcMain.on("emailAccounts", (e) => {
+	e.returnValue = emailAccounts;
+});
+
+ipcMain.on("emailUpdate", (settings) => {
+	// Save the information
+
+	// Send back to the window of the settings
+	ipcRenderer.send("emailAccountsUpdated", emailAccounts);
 })
 
 // Returns a url joined path 
@@ -114,4 +129,20 @@ function CreateMenu() {
 	}));
 
 	return menu;
+}
+
+function SetEmailAccounts() {
+	let settingsFile = path.join(app.getPath("userData"), "settings.json");
+	if (fs.existsSync(settingsFile)) {
+		let settings = JSON.parse(fs.readFileSync(settingsFile));
+
+		for (let account of settings.accounts) {
+			emailAccounts.push(new EmailAccount(account));
+		}
+
+
+	}
+	else {
+
+	}	
 }

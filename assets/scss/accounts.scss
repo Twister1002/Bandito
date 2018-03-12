@@ -1,5 +1,82 @@
-#accounts-edit {
-    $microsoft: #000000;
-    $google: $light-grey;
-    $yahoo: #FFFF00;
+#accounts-section {
+    .accounts, .services {
+        @include flexbox();
+        flex-direction: column;
+
+        > div {
+            position: relative;
+            flex: 1 0 auto;
+            height: 3.5em;
+            margin: .25em 0;
+            background-color: $light-grey;
+            border: 1px solid $light-grey;
+        }
+
+        .account {
+            padding: .75em;
+            margin: .25em auto;
+
+            .icon {
+                display: inline-block;
+                vertical-align: top;
+                text-align: center;
+                border: 1.25em solid $test;
+                border-radius: 100%;
+                background-color: $test;
+                width: 1em;
+            }
+    
+            .info {
+                display: inline-block;
+                vertical-align: top;
+                margin: 0 0 0 1em;
+                width: 15em;
+    
+                .name {
+    
+                }
+    
+                .email {
+                    
+                }
+    
+                .email-type {
+                    text-transform: capitalize;
+                }
+            }
+    
+            .remove-account {
+                position: relative;
+                border: none;
+                background-color: $test;
+                padding: .5rem;
+                top: 25%;
+            }
+        }
+    }
+
+    .services {
+        margin-top: 1em;
+        flex-direction: row;
+        flex-wrap: wrap;
+
+        aside {
+            width: 100%;
+        }
+
+        > div {
+            flex: 1 0 auto;
+            width: 5em;
+            margin: 0 .5em;
+            padding: .5em;
+
+            &:first-of-type {
+                margin: 0 .5em 0 0;
+            }
+
+            &:last-of-type {
+                margin: 0 0 0 .5em;
+            }
+        }
+    }
 }
